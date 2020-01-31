@@ -17,7 +17,8 @@ let wordStatus = null;
 let maxWrong = 6;
 document.getElementById('maxWrong').innerHTML = maxWrong;
 
-
+const winSound = () => new Audio (`sounds/333404__jayfrosting__cheer-2.wav`)
+const looseSound = () => new Audio (`sounds/344065__reitanna__dumb.wav`)
 
 
 function randomWord(){
@@ -30,7 +31,7 @@ function generateButtons(){
     const buttonsHtml = letterArray.map(letter =>
         `
         <button
-            class="key"
+            class="btn btn-lg btn-primary m-2"
             id='`+ letter +`'
             onClick="handleGuess('`+ letter +`')"
         >
@@ -59,13 +60,21 @@ function handleGuess(letter){
 
 function gameWin(){
     if(wordStatus === answer){
-        document.getElementById('keyboard').innerHTML = "YOU WIN MY LOVE"
+        setTimeout(()=> {
+            winSound().play()
+        },0)
+        document.getElementById('keyboard').innerHTML = "YOU WIN"
+       
     };
 };
 
 function gameLost(){
     if(mistake === maxWrong){
+        setTimeout(()=> {
+            looseSound().play()
+        },0)
         document.getElementById('keyboard').innerHTML = "YOU LOST MTF"
+        
     };
 };
 
